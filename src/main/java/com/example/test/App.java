@@ -5,65 +5,56 @@ package com.example.test;
  *
 */
 
-
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Random;
+import java.lang.reflect.Array;
+import java.util.*;
 
 /**
  * Created by vagrant on 2/7/15.
  */
 public class App {
 
+    List<String> names;
 
-     static String team[] = {"tledford@csumb.edu", "ychino@csumb.edu", "jocortez@csumb.edu", "bensanchez@csumb.edu", "jdiazflores@csumb.edu", "marivera@csumb.edu", "bjaramillo@csumb.edu", "brdamico@csumb.edu", "boody@csumb.edu"};
-     static ArrayList team1= new ArrayList();
-     static ArrayList team2 = new ArrayList();
-     static ArrayList team3 = new ArrayList();
-
-
-    public static void main(String[] args) {
-        String name = args[0];
-        int assignment = Integer.parseInt(args[1]);
-        ArrayList myReviewTeam = makeGroup(name, assignment);
+    public App(List<String> names){
+        this.names = names;
     }
 
-    public static ArrayList makeGroup(String name, int x){
-        Collections.shuffle(Arrays.asList(team), new Random(x));
+    public ArrayList<String> createGroup(String targetName) throws Exception{
 
-        for(int i = 0; i < team.length; i++){
-            if (i >= 0 && i <= 2)
-                team1.add(team[i]);
-            else if (3  <= i && i < 6)
-                team2.add(team[i]);
-            else
-                team3.add(team[i]);
+        ArrayList<ArrayList<String>> groups = new ArrayList<ArrayList<String>>();
+        ArrayList<String> tmpGroup = new ArrayList<String>();
+        for(String name : this.names){
+            tmpGroup.add(name);
+            if(tmpGroup.size() == 3){
+                groups.add(tmpGroup);
+                tmpGroup = new ArrayList<String>();
+            }
+        }
+
+        for(ArrayList<String> group : groups){
+            if(group.contains(targetName))
+                return group;
+        }
+
+        throw new Exception("Target not found");
+
+    }
 
 
-        }
-        if (team1.contains(name))
-        {
-            System.out.print(team1);
-            return team1;
-        }
-        else if (team2.contains(name))
-        {
-            System.out.print(team2);
-            return team2;
-        }
-        else if (team3.contains(name))
-        {
-            System.out.print(team3);
-            return team3;
 
-        }
-        else {
-            System.out.print("Name does not exist.");
+    public static void main(String[] args) throws Exception{
+        String targetName = args[0];
+        long assignmentNumber = Long.valueOf(args[1]);
 
-            return null;
-        }
+        List<String> names = new ArrayList<String>();
+        names.add("a");
+        names.add("b");
+        names.add("c");
+        Collections.shuffle(names, new Random(assignmentNumber));
+
+        App app = new App(names);
+
+        System.out.print(app.createGroup(targetName));
     }
 
 }
