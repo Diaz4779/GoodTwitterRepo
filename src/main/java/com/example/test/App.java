@@ -19,25 +19,37 @@ public class App {
         this.names = names;
     }
 
-    public ArrayList<String> createGroup(String targetName) throws Exception{
-
+    public ArrayList<ArrayList<String>> createSubgroups() {
         ArrayList<ArrayList<String>> groups = new ArrayList<ArrayList<String>>();
         ArrayList<String> tmpGroup = new ArrayList<String>();
-        for(String name : this.names){
+        for (String name: this.names) {
             tmpGroup.add(name);
-            if(tmpGroup.size() == 3){
+            if (tmpGroup.size() == 3) {
                 groups.add(tmpGroup);
                 tmpGroup = new ArrayList<String>();
             }
         }
+        return groups;
+    }
 
-        for(ArrayList<String> group : groups){
-            if(group.contains(targetName))
+    public ArrayList<String> findGroup(ArrayList<ArrayList<String>> groups, String name) {
+        for (ArrayList<String> group : groups) {
+            if (group.contains(name)) {
                 return group;
+            }
         }
+        return null;
+    }
 
-        throw new Exception("Target not found");
+    public ArrayList<String> createGroup(String targetName) throws Exception{
 
+        ArrayList<ArrayList<String>> groups = createSubgroups();
+        ArrayList<String> group = findGroup(groups, targetName);
+        if(group == null){
+            throw new Exception("target name not found.");
+        } else{
+            return group;
+        }
     }
 
 
