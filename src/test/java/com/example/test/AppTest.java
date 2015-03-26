@@ -70,4 +70,36 @@ public class AppTest {
         assertEquals(actualB, expected);
         assertEquals(actualC, expected);
     }
+
+    @Test
+    public void createSubgroups(){
+        List<String> names = new ArrayList<String>();
+        names.add("a");
+        names.add("b");
+        names.add("c");
+        names.add("d");
+        names.add("e");
+        names.add("f");
+        App app = new App(names);
+        ArrayList<ArrayList<String>> groups = app.createSubgroups();
+        assertEquals(groups.size(), 2);
+        assertEquals(groups.get(0).size(), 3);
+
+    }
+
+    @Test
+    public void findGroup(){
+        List<String> names = new ArrayList<String>();
+        names.add("a");
+        names.add("b");
+        names.add("c");
+        names.add("d");
+        names.add("e");
+        names.add("f");
+        App app = new App(names);
+        ArrayList<ArrayList<String>> groups = app.createSubgroups();
+        assertEquals(groups.size(), 2);
+        assertEquals(groups.get(0).size(), 3);
+
+    }
 }
