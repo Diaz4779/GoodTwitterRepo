@@ -76,4 +76,12 @@ public class AppTest {
         assertEquals(groups.get(0).size(), 3);
 
     }
+
+    @Test
+    public void groupSize() {
+        App app = new App(this.names);
+        ArrayList<ArrayList<String>> groups =
+                app.createSubgroups();
+        assertEquals(groups.size(), 2);
+    }
 }
