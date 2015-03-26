@@ -3,32 +3,30 @@ package com.example.test;
 
 
 import org.junit.Test;
-import org.junit.Ignore;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-import sun.nio.cs.Surrogate;
+import org.junit.Before;
 import static org.junit.Assert.assertEquals;
-
-
-
-
-
-
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AppTest {
 
-    @Test
-    public void groupsHaveThreePeople() throws Exception{
-        List<String> names = new ArrayList<String>();
+    private List<String> names;
+
+    @Before
+    public void setUp(){
+        this.names = new ArrayList<String>();
         names.add("a");
         names.add("b");
         names.add("c");
         names.add("d");
         names.add("e");
         names.add("f");
+    }
+
+    @Test
+    public void groupsHaveThreePeople() throws Exception{
+
         App app = new App(names);
         List<String> group = app.createGroup("a");
         assertEquals(group.size(), 3);
@@ -36,13 +34,7 @@ public class AppTest {
 
     @Test
     public void givenUsernameIsInGroup() throws Exception {
-        List<String> names = new ArrayList<String>();
-        names.add("a");
-        names.add("b");
-        names.add("c");
-        names.add("d");
-        names.add("e");
-        names.add("f");
+
         App app = new App(names);
         String name = "a";
         List<String> group = app.createGroup(name);
@@ -51,13 +43,7 @@ public class AppTest {
 
     @Test
     public void groupsHaveConsistentMembership() throws Exception {
-        List<String> names = new ArrayList<String>();
-        names.add("a");
-        names.add("b");
-        names.add("c");
-        names.add("d");
-        names.add("e");
-        names.add("f");
+
         App app = new App(names);
         List<String> actualA = app.createGroup("a");
         List<String> actualB = app.createGroup("b");
@@ -73,13 +59,7 @@ public class AppTest {
 
     @Test
     public void createSubgroups(){
-        List<String> names = new ArrayList<String>();
-        names.add("a");
-        names.add("b");
-        names.add("c");
-        names.add("d");
-        names.add("e");
-        names.add("f");
+
         App app = new App(names);
         ArrayList<ArrayList<String>> groups = app.createSubgroups();
         assertEquals(groups.size(), 2);
@@ -89,13 +69,7 @@ public class AppTest {
 
     @Test
     public void findGroup(){
-        List<String> names = new ArrayList<String>();
-        names.add("a");
-        names.add("b");
-        names.add("c");
-        names.add("d");
-        names.add("e");
-        names.add("f");
+
         App app = new App(names);
         ArrayList<ArrayList<String>> groups = app.createSubgroups();
         assertEquals(groups.size(), 2);
