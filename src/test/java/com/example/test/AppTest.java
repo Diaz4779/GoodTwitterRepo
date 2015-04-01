@@ -1,11 +1,8 @@
-
 package com.example.test;
-
 
 import org.junit.Test;
 import org.junit.Before;
 import static org.junit.Assert.assertEquals;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +27,14 @@ public class AppTest {
         App app = new App(names);
         List<String> group = app.createGroup("a");
         assertEquals(group.size(), 3);
+    }
+  
+   @Test
+    public void groupNotContainName() throws Exception{
+        App app = new App(names);
+ 	String name = "z";
+	List<String> group = app.createGroup("a");
+	assertEquals(group.contains(name), false);
     }
 
     @Test
